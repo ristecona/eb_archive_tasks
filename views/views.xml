@@ -1,0 +1,46 @@
+<odoo>
+  <record id="archive_task_form" model="ir.ui.view">
+      <field name="name">eb.archive.tasks.form</field>
+      <field name="model">base.task.archive.automatic.wizard</field>
+      <field name="arch" type="xml">
+          <form string="Archive Tasks">
+              <group string="Select Tasks">
+                  <field name="task_ids" nolabel="1">
+                      <tree>
+                          <field name="create_date"/>
+                          <field name="name"/>
+                          <!-- <field name="user_id"/> -->
+                          <field name="id"/>
+                      </tree>
+                  </field>
+              </group>
+              <footer>
+                  <button name="action_archive" type="object" string="Archive" class="btn-primary"/>
+                  <button string="Cancel" class="btn-default" special="cancel"/>
+              </footer>
+          </form>
+      </field>
+  </record>
+
+  <!--  Merge leads/opportunities action -->
+  <record id="archive_tasks_act" model="ir.actions.act_window">
+      <field name="name">Archive Tasks</field>
+      <field name="res_model">base.task.archive.automatic.wizard</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="archive_task_form"/>
+      <field name="target">new</field>
+  </record>
+
+  <act_window
+      id="action_archive_tasks"
+      name="Archive Tasks"
+      multi="True"
+      key2="client_action_multi"
+      res_model="base.task.archive.automatic.wizard"
+      src_model="project.task"
+      view_mode="form"
+      target="new"
+      view_type="form"/>
+
+</odoo>
